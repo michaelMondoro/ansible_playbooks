@@ -1,5 +1,5 @@
 ---
-- name: Install and Setup Go and Pocketbase
+- name: Install and Setup Pocketbase
   hosts: localhost
   become: yes
   tasks:
@@ -20,3 +20,17 @@
     unarchive:
       src: /root/pocketbase/pocketbase.zip
       dest: /root/pocketbase
+
+  - name: setup pocketbase systemd
+      template:
+        src: pocketbase.service.j2
+        dest: /etc/systemd/system/pocketbase.service
+  
+  - name: Reload systemd
+    service:
+      daemon_reload: true
+
+  - name: start pocketbase
+      service:
+        name: pocketbase
+        state: started
