@@ -33,3 +33,7 @@
       service:
         name: pocketbase
         state: started
+      register: pocketbase_output
+    
+    - debug:
+      msg: "pocketbase_output"
