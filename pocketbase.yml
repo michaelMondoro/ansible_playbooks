@@ -19,4 +19,4 @@
   - name: Extract pocketbase
     unarchive:
       src: /root/pocketbase/pocketbase.zip
-      dest: /root/
+      dest: /root/pocketbase
