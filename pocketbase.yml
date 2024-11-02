@@ -37,4 +37,4 @@
     
     - name: debug
       debug:
-        msg: "pocketbase_output"
+        msg: "{{pocketbase_output}}"
