@@ -3,34 +3,33 @@
   hosts: localhost
   become: yes
   tasks:
+    - name: Create pocketbase directory
+      file:
+        path: /root/pocketbase
+        state: directory
+        mode: '0755'
 
-  - name: Create pocketbase directory
-    file:
-      path: /root/pocketbase
-      state: directory
-      mode: '0755'
+    - name: Download Pocketbase
+      get_url:
+        url: https://github.com/pocketbase/pocketbase/releases/download/v0.22.22/pocketbase_0.22.22_linux_amd64.zip
+        dest: /root/pocketbase/pocketbase.zip
+        mode: '0755'
 
-  - name: Download Pocketbase
-    get_url:
-      url: https://github.com/pocketbase/pocketbase/releases/download/v0.22.22/pocketbase_0.22.22_linux_amd64.zip
-      dest: /root/pocketbase/pocketbase.zip
-      mode: '0755'
+    - name: Extract pocketbase
+      unarchive:
+        src: /root/pocketbase/pocketbase.zip
+        dest: /root/pocketbase
 
-  - name: Extract pocketbase
-    unarchive:
-      src: /root/pocketbase/pocketbase.zip
-      dest: /root/pocketbase
+    - name: setup pocketbase systemd
+      template:
+        src: pocketbase.service.j2
+        dest: /etc/systemd/system/pocketbase.service
+    
+    - name: Reload systemd
+      service:
+        daemon_reload: true
 
-  - name: setup pocketbase systemd
-    template:
-      src: pocketbase.service.j2
-      dest: /etc/systemd/system/pocketbase.service
-  
-  - name: Reload systemd
-    service:
-      daemon_reload: true
-
-  - name: start pocketbase
-    service:
-      name: pocketbase
-      state: started
+    - name: start pocketbase
+      service:
+        name: pocketbase
+        state: started
