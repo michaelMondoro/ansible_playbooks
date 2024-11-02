@@ -11,15 +11,12 @@
     - name: setup nginx config
       template:
         src: nginx_config.j2
-        dest: /etc/nginx/sites-available/my_site
-
-    - name: link site config
-      shell: ln -s /etc/nginx/sites-available/my_site /etc/nginx/sites-enabled/
+        dest: /etc/nginx/sites-available/default
 
     - name: setup index.html
       template:
         src: index.html.j2
-        dest: /var/www/html/my_site_index.html
+        dest: /var/www/html/index.html
 
     - name: start nginx
       service:
