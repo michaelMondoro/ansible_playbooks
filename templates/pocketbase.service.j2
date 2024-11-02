@@ -5,11 +5,10 @@ Description = pocketbase
 Type           = simple
 User           = root
 Group          = root
-LimitNOFILE    = 4096
 Restart        = always
 RestartSec     = 5s
 WorkingDirectory=/root/pocketbase/
-ExecStart      = ./pocketbase serve
+ExecStart      = /root/pocketbase/pocketbase serve
 
 [Install]
 WantedBy = multi-user.target
