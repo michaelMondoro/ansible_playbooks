@@ -33,12 +33,3 @@
       service:
         name: pocketbase
         state: started
-    
-    - name: status
-      service:
-        name: pocketbase
-      register: status
-
-    - name: show status
-      debug:
-        msg: "{{ status }}"
