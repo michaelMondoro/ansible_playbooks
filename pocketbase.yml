@@ -33,8 +33,12 @@
       service:
         name: pocketbase
         state: started
-      register: pocketbase_output
     
-    - name: debug
+    - name: status
+      service:
+        name: pocketbase
+      register: status
+
+    - name: show status
       debug:
-        msg: "{{pocketbase_output}}"
+        msg: "{{ status }}"
