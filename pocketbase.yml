@@ -1,0 +1,16 @@
+---
+- name: Install and Setup Go and Pocketbase
+  hosts: localhost
+  become: yes
+  tasks:
+
+  - name: Download Pocketbase
+    get_url:
+      url: https://github.com/pocketbase/pocketbase/releases/download/v0.22.22/pocketbase_0.22.22_linux_amd64.zip
+      dest: /root/pocketbase.zip
+      mode: '755'
+
+  - name: Extract pocketbase
+    unarchive:
+      src: /root/pocketbase.zip
+      dest: /root/
