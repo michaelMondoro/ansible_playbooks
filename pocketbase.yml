@@ -35,5 +35,6 @@
         state: started
       register: pocketbase_output
     
-    - debug:
-      msg: "pocketbase_output"
+    - name: debug
+      debug:
+        msg: "pocketbase_output"
